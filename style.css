@@ -1,0 +1,281 @@
+/* ===== 基本設定 ===== */
+:root {
+  --navy: #1c2a3f;
+  --navy-light: #2a3d58;
+  --gold: #b8914a;
+  --gold-dark: #9c7a3a;
+  --bg: #ffffff;
+  --tint: #f4f2ee;
+  --text: #262a30;
+  --text-sub: #5b616b;
+  --line: #e2ddd4;
+  --radius: 6px;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; scroll-padding-top: 76px; }
+
+body {
+  margin: 0;
+  font-family: "Noto Sans JP", sans-serif;
+  font-size: 16px;
+  line-height: 1.95;
+  color: var(--text);
+  background: var(--bg);
+  letter-spacing: 0.03em;
+}
+
+h1, h2, h3, h4 { font-family: "Noto Serif JP", serif; line-height: 1.5; margin: 0; font-weight: 700; }
+p { margin: 0; }
+a { color: inherit; }
+
+.container { width: 100%; max-width: 1120px; margin: 0 auto; padding: 0 20px; }
+.container--narrow { max-width: 840px; }
+
+.pc-only { display: none; }
+@media (min-width: 768px) { .pc-only { display: inline; } }
+
+/* ===== ボタン ===== */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 180px;
+  padding: 15px 32px;
+  border-radius: 2px;
+  font-weight: 700;
+  text-decoration: none;
+  letter-spacing: 0.1em;
+  transition: background 0.2s, color 0.2s;
+}
+.btn--primary { background: var(--gold); color: #fff; }
+.btn--primary:hover { background: var(--gold-dark); }
+.btn--ghost { border: 1px solid rgba(255, 255, 255, 0.7); color: #fff; }
+.btn--ghost:hover { background: #fff; color: var(--navy); }
+
+/* ===== ヘッダー ===== */
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(255, 255, 255, 0.96);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid var(--line);
+}
+.header__inner { display: flex; align-items: center; justify-content: space-between; height: 72px; }
+
+.logo { display: flex; align-items: baseline; gap: 12px; text-decoration: none; }
+.logo__en { font-family: "Montserrat", sans-serif; font-weight: 700; font-size: 26px; color: var(--navy); letter-spacing: 0.04em; }
+.logo__en::first-letter { color: var(--gold); }
+.logo__ja { font-size: 13px; color: var(--text-sub); }
+
+.nav { display: flex; align-items: center; gap: 26px; }
+.nav a { text-decoration: none; font-size: 14px; font-weight: 500; }
+.nav a:hover { color: var(--gold); }
+.nav__cta { background: var(--navy); color: #fff !important; padding: 9px 20px; border-radius: 2px; }
+.nav__cta:hover { background: var(--navy-light); }
+
+.menu-btn { display: none; }
+
+@media (max-width: 900px) {
+  .menu-btn {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 6px;
+    width: 44px;
+    height: 44px;
+    padding: 10px;
+    background: none;
+    border: none;
+    cursor: pointer;
+  }
+  .menu-btn span { display: block; height: 2px; background: var(--navy); transition: 0.25s; }
+  .menu-btn[aria-expanded="true"] span:nth-child(1) { transform: translateY(8px) rotate(45deg); }
+  .menu-btn[aria-expanded="true"] span:nth-child(2) { opacity: 0; }
+  .menu-btn[aria-expanded="true"] span:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
+
+  .nav {
+    position: absolute;
+    top: 72px;
+    left: 0;
+    right: 0;
+    flex-direction: column;
+    gap: 0;
+    background: #fff;
+    border-bottom: 1px solid var(--line);
+    display: none;
+  }
+  .nav.is-open { display: flex; }
+  .nav a { width: 100%; padding: 16px 20px; border-top: 1px solid var(--line); font-size: 16px; }
+  .nav__cta { border-radius: 0; text-align: center; }
+  .logo__ja { display: none; }
+}
+
+/* ===== メインビジュアル ===== */
+.hero {
+  position: relative;
+  padding: 120px 0 128px;
+  color: #fff;
+  background:
+    linear-gradient(120deg, rgba(28, 42, 63, 0.97) 40%, rgba(42, 61, 88, 0.92)),
+    repeating-linear-gradient(45deg, transparent 0 22px, rgba(184, 145, 74, 0.06) 22px 23px),
+    var(--navy);
+  overflow: hidden;
+}
+.hero::after {
+  content: "";
+  position: absolute;
+  right: -120px;
+  top: 50%;
+  width: 520px;
+  height: 520px;
+  margin-top: -260px;
+  border: 1px solid rgba(184, 145, 74, 0.35);
+  border-radius: 50%;
+  box-shadow: 0 0 0 60px rgba(184, 145, 74, 0.05), 0 0 0 120px rgba(184, 145, 74, 0.03);
+  pointer-events: none;
+}
+.hero__inner { position: relative; z-index: 1; }
+.hero__en { font-family: "Montserrat", sans-serif; color: var(--gold); letter-spacing: 0.2em; font-size: 14px; font-weight: 500; margin-bottom: 18px; }
+.hero__title { font-size: clamp(34px, 6vw, 58px); letter-spacing: 0.08em; margin-bottom: 28px; }
+.hero__text { font-size: 17px; color: rgba(255, 255, 255, 0.85); margin-bottom: 44px; }
+.hero__actions { display: flex; flex-wrap: wrap; gap: 14px; }
+
+/* ===== セクション共通 ===== */
+.section { padding: 100px 0; }
+.section--tinted { background: var(--tint); }
+.section--dark { background: var(--navy); color: #fff; }
+.section__en { font-family: "Montserrat", sans-serif; color: var(--gold); font-weight: 700; letter-spacing: 0.2em; font-size: 13px; text-transform: uppercase; }
+.section__en--center { text-align: center; }
+.section__title { font-size: clamp(26px, 4vw, 34px); color: var(--navy); margin: 6px 0 48px; letter-spacing: 0.08em; }
+.section__title--center { text-align: center; }
+.section--dark .section__title { color: #fff; }
+
+/* ===== 私たちについて ===== */
+.about { display: grid; grid-template-columns: 1fr 2fr; gap: 48px; }
+.about .section__title { margin-bottom: 0; }
+.about__body { display: grid; gap: 18px; color: var(--text-sub); }
+.about__lead { font-family: "Noto Serif JP", serif; font-size: clamp(20px, 2.6vw, 24px); color: var(--navy); font-weight: 700; line-height: 1.7; }
+@media (max-width: 760px) { .about { grid-template-columns: 1fr; gap: 24px; } }
+
+/* ===== 事業内容 ===== */
+.business { display: grid; grid-template-columns: 1.1fr 1fr; gap: 28px; margin-bottom: 28px; }
+@media (max-width: 860px) { .business { grid-template-columns: 1fr; } }
+.business__main, .items { background: #fff; padding: 40px 36px; border-radius: var(--radius); }
+.business__main { border-left: 4px solid var(--gold); }
+.business__tag { font-family: "Montserrat", sans-serif; font-size: 12px; font-weight: 700; letter-spacing: 0.2em; color: var(--gold); }
+.business__main h3 { font-size: 23px; color: var(--navy); margin: 8px 0 16px; }
+.business__main p { color: var(--text-sub); }
+
+.items__title { font-size: 18px; color: var(--navy); margin-bottom: 18px; }
+.items__list { list-style: none; padding: 0; margin: 0 0 16px; display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
+.items__list li { padding: 10px 14px; background: var(--tint); border-radius: var(--radius); font-weight: 500; font-size: 15px; }
+.items__note { font-size: 13px; color: var(--text-sub); }
+
+.points { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 28px; }
+.point { background: #fff; padding: 32px 28px; border-radius: var(--radius); }
+.point__num { font-family: "Montserrat", sans-serif; font-size: 30px; font-weight: 700; color: var(--gold); line-height: 1; }
+.point h4 { font-size: 18px; color: var(--navy); margin: 12px 0 8px; }
+.point p { color: var(--text-sub); font-size: 15px; }
+
+/* ===== 店舗一覧 ===== */
+.stores__lead { text-align: center; color: var(--text-sub); margin: -28px 0 40px; }
+.stores { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 28px; }
+.store__pref { align-self: flex-start; padding: 2px 12px; margin-bottom: 10px; background: var(--navy); color: #fff; font-size: 13px; font-weight: 700; letter-spacing: 0.1em; border-radius: 2px; }
+.store { border: 1px solid var(--line); border-top: 3px solid var(--navy); padding: 32px 30px; border-radius: var(--radius); }
+.store__name { font-size: 20px; color: var(--navy); margin-bottom: 18px; }
+.store { display: flex; flex-direction: column; }
+.store__link {
+  align-self: flex-start;
+  margin-top: auto;
+  padding: 8px 18px;
+  border: 1px solid var(--navy);
+  border-radius: 2px;
+  color: var(--navy);
+  font-size: 14px;
+  font-weight: 700;
+  text-decoration: none;
+  transition: background 0.2s, color 0.2s;
+}
+.store__link::after { content: " ↗"; }
+.store__link:hover { background: var(--navy); color: #fff; }
+
+/* ===== 代表挨拶 ===== */
+.message { display: grid; gap: 22px; color: rgba(255, 255, 255, 0.88); font-size: 17px; line-height: 2.1; }
+.message__sign { display: flex; flex-direction: column; align-items: flex-end; margin-top: 12px; line-height: 1.6; }
+.message__sign span { font-size: 14px; color: rgba(255, 255, 255, 0.7); }
+.message__sign strong { font-family: "Noto Serif JP", serif; font-size: 24px; color: #fff; letter-spacing: 0.2em; }
+
+/* ===== 会社概要 ===== */
+.company { width: 100%; border-collapse: collapse; border-top: 2px solid var(--navy); }
+.company th, .company td { padding: 20px 24px; border-bottom: 1px solid var(--line); text-align: left; vertical-align: top; }
+.company th { width: 28%; color: var(--navy); font-weight: 700; white-space: nowrap; background: var(--tint); }
+@media (max-width: 600px) {
+  .company th, .company td { display: block; width: 100%; }
+  .company th { padding-bottom: 8px; border-bottom: none; }
+  .company td { padding-top: 8px; }
+}
+
+/* ===== お問い合わせ ===== */
+.contact { background: var(--tint); text-align: center; }
+.contact__title { font-size: clamp(26px, 4vw, 34px); color: var(--navy); margin: 6px 0 18px; letter-spacing: 0.08em; }
+.contact__text { color: var(--text-sub); margin-bottom: 36px; }
+.contact__tel {
+  display: inline-flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: min(100%, 420px);
+  padding: 30px 40px;
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  text-decoration: none;
+  transition: border-color 0.2s;
+}
+.contact__tel:hover { border-color: var(--gold); }
+.contact__label { font-weight: 700; color: var(--navy); font-size: 14px; }
+.contact__number { font-family: "Montserrat", sans-serif; font-size: 34px; font-weight: 700; color: var(--navy); letter-spacing: 0.05em; }
+.contact__note { font-size: 13px; color: var(--text-sub); }
+
+/* ===== フッター ===== */
+.footer { background: var(--navy); color: rgba(255, 255, 255, 0.75); padding: 44px 0 36px; text-align: center; font-size: 13px; line-height: 1.9; }
+.footer__logo { font-family: "Montserrat", sans-serif; font-size: 26px; font-weight: 700; color: #fff; }
+.footer__fc { margin-top: 8px; font-size: 12px; opacity: 0.8; }
+.footer__copy { margin-top: 14px; opacity: 0.6; }
+
+@media (max-width: 600px) {
+  .hero { padding: 80px 0 88px; }
+  .section { padding: 72px 0; }
+  .hero__actions .btn { flex: 1; min-width: 0; }
+  .business__main, .items { padding: 30px 24px; }
+}
+
+/* 店舗写真 */
+.store { overflow: hidden; }
+.store__img {
+  display: block;
+  width: calc(100% + 60px);
+  max-width: none;
+  height: auto;
+  aspect-ratio: 5 / 3;
+  object-fit: cover;
+  margin: -32px -30px 22px;
+}
+
+/* オープン予定の店舗 */
+.store__soon {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  background:
+    repeating-linear-gradient(45deg, transparent 0 22px, rgba(184, 145, 74, 0.08) 22px 23px),
+    var(--navy);
+  color: #fff;
+  text-align: center;
+}
+.store__soon-label { font-family: "Montserrat", sans-serif; font-size: 13px; font-weight: 700; letter-spacing: 0.25em; color: var(--gold); }
+.store__soon-text { font-family: "Noto Serif JP", serif; font-size: clamp(22px, 3vw, 28px); font-weight: 700; letter-spacing: 0.08em; }
